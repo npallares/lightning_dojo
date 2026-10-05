@@ -1,0 +1,37 @@
+{
+  "name": "lightning-dojo",
+  "version": "0.1.0",
+  "description": "lightning-dojo",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run dev",
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "eslint '**/*.js' --fix",
+    "build": "vite build",
+    "dev": "vite dev --host",
+    "postinstall": "husky"
+  },
+  "devDependencies": {
+    "@lightningjs/msdf-generator": "^1.1.1",
+    "vite": "^5.4.8",
+    "typescript": "^5.6.3",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.11.1",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.9.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "@lightningjs/blits": "^2.11.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
+  }
+}
