@@ -1,6 +1,5 @@
 import Blits from "@lightningjs/blits";
 
-
 export default Blits.Component("Card", {
   props: {
     title: "Movie",
@@ -8,7 +7,7 @@ export default Blits.Component("Card", {
     color: "red",
     bgColor: "#303030",
   },
-  
+
   state() {
     return {
       focused: false,
@@ -26,12 +25,22 @@ export default Blits.Component("Card", {
     },
   },
 
-  computed:{
-    cardColor(){
-      return this.focused ? 'rgb(105, 75, 255)' : '#303030'
-    }
+  computed: {
+    cardColor() {
+      return this.focused ? "rgb(105, 75, 255)" : "#303030";
+    },
   },
 
+  input: {
+    enter() {
+      console.log("Selected title: " + this.title);
+    },
+
+    back() {
+      console.log("Back desde card: " + this.title)
+      this.$parent.$focus()
+    }
+  },
 
   template: `
     <Element w="280" h="180" :color="$cardColor">

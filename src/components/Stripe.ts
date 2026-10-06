@@ -6,10 +6,40 @@ export default Blits.Component("Stripe", {
     Card,
   },
 
-  hooks:{
-    focus(){
-        this.$select('card0')?.$focus();
-    }
+  state() {
+    return {
+      selectIndex: 0,
+    };
+  },
+
+  hooks: {
+    focus() {
+      //this.$select("card0")?.$focus(); HARCODEADO
+      this.focusCard(this.selectIndex);
+    },
+  },
+
+  methods: {
+    focusCard(index: number) {
+      const card = this.$select(`card${index}`);
+      card?.$focus();
+    },
+  },
+
+  input: {
+    right() {
+      if (this.selectIndex < 2) {
+        this.selectIndex += 1;
+        this.focusCard(this.selectIndex);
+      }
+    },
+
+    left() {
+      if (this.selectIndex > 0) {
+        this.selectIndex -= 1;
+        this.focusCard(this.selectIndex);
+      }
+    },
   },
 
   template: `
