@@ -1,9 +1,15 @@
 import Blits from "@lightningjs/blits";
 import Card from "./Card";
+import { Movie } from "../domain/Movie";
 
 export default Blits.Component("Stripe", {
   components: {
     Card,
+  },
+
+  props: {
+    title: "",
+    movies: [] as Movie[],
   },
 
   state() {
@@ -28,7 +34,7 @@ export default Blits.Component("Stripe", {
 
   input: {
     right() {
-      if (this.selectIndex < 2) {
+      if (this.selectIndex < this.movies.length - 1) {
         this.selectIndex += 1;
         this.focusCard(this.selectIndex);
       }
@@ -44,11 +50,17 @@ export default Blits.Component("Stripe", {
 
   template: `
     <Element>
-      <Card ref="card0" x="0" y="0" title="Interstellar" year="2014" color="blue" />
-    
-      <Card ref="card1" x="300" y="0" title="The Matrix" year="1999" color="pink" />
-    
-      <Card ref="card2" x="600" y="0" title="Blade Runner" year="1982" color="green" />
+      <Text x="0" y="0" content="$title" />
+      <Card
+        :for="(movie, index) in $movies"
+        ref="card"
+        key="$movie.id"
+        :x="$index * 300"
+        y="50"
+        :title="$movie.title"
+        :year="$movie.year"
+        :color="$movie.color"
+      />
     </Element>
   `,
 });

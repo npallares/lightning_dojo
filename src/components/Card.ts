@@ -23,6 +23,16 @@ export default Blits.Component("Card", {
       this.focused = false;
       console.log(`Card Unfocus: ${this.title}`);
     },
+    init() {
+      console.log(`Card initialized: ${this.title}`);
+    },
+    ready() {
+      console.log(`Card ready: ${this.title}`);
+    },
+
+    destroy() {
+      console.log(`Card destroyed: ${this.title}`);
+    },
   },
 
   computed: {
@@ -37,9 +47,9 @@ export default Blits.Component("Card", {
     },
 
     back() {
-      console.log("Back desde card: " + this.title)
-      this.$parent.$focus()
-    }
+      console.log("Back desde card: " + this.title);
+      this.$parent.$focus();
+    },
   },
 
   template: `
