@@ -61,6 +61,7 @@ export default Blits.Component("Stripe", {
         :title="$movie.title"
         :year="$movie.year"
         :color="$movie.color"
+        :imageUrl="$movie.imageUrl"
       />
     </Element>
   `,

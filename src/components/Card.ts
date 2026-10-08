@@ -1,5 +1,7 @@
 import Blits from "@lightningjs/blits";
 
+type ImageStatus = "loading" | "loaded" | "error";
+
 export default Blits.Component("Card", {
   props: {
     id: "",
@@ -7,11 +9,13 @@ export default Blits.Component("Card", {
     year: 2026,
     color: "red",
     bgColor: "#303030",
+    imageUrl: "",
   },
 
   state() {
     return {
       focused: false,
+      imageStatus: "loading" as ImageStatus,
     };
   },
 
@@ -28,7 +32,10 @@ export default Blits.Component("Card", {
       console.log(`Card initialized: ${this.title}`);
     },
     ready() {
-      console.log(`Card ready: ${this.title}`);
+      console.log("Card ready:", {
+        title: this.title,
+        imageUrl: this.imageUrl,
+      });
     },
 
     destroy() {
@@ -38,7 +45,17 @@ export default Blits.Component("Card", {
 
   computed: {
     cardColor() {
-      return this.focused ? "rgb(159, 159, 159)" : "#303030";
+      return this.focused ? "rgb(202, 16, 16)" : "#303030";
+    },
+
+    placeholderAlpha() {
+      return this.imageStatus === "loaded" ? 0 : 1;
+    },
+
+    placeholderText() {
+      return this.imageStatus === "error"
+        ? "Imagen no disponible"
+        : "Cargando...";
     },
   },
 
@@ -53,9 +70,29 @@ export default Blits.Component("Card", {
     },
   },
 
+  methods: {
+    onImageLoaded(dimensions: { w: number; h: number }) {
+      this.imageStatus = "loaded";
+
+      console.log(`Image loaded: ${this.title}`, dimensions);
+    },
+
+    onImageError(error: string) {
+      this.imageStatus = "error";
+
+      console.error(`Image failed: ${this.title}`, error);
+    },
+  },
+
   template: `
     <Element w="280" h="180" :color="$cardColor">
-      <Element w="280" h="90" color="$color" />
+      <Element w="280" h="90">
+        <Element w="280" h="90" :src="$imageUrl" @loaded="$onImageLoaded" @error="$onImageError" />
+    
+        <Element w="280" h="90" color="#454545" :alpha="$placeholderAlpha">
+          <Text x="20" y="30" size="20" :content="$placeholderText" />
+        </Element>
+      </Element>
       <Text x="20" y="100" content="$title" />
       <Text x="20" y="140" content="$year" />
     </Element>
