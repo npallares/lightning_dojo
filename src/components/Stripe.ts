@@ -50,13 +50,14 @@ export default Blits.Component("Stripe", {
 
   template: `
     <Element>
-      <Text x="0" y="0" content="$title" />
+      <Text x="0" y="0" content="$title" color="#251511" />
       <Card
         :for="(movie, index) in $movies"
         ref="card"
         key="$movie.id"
         :x="$index * 300"
         y="50"
+        :id="$movie.id"
         :title="$movie.title"
         :year="$movie.year"
         :color="$movie.color"

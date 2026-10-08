@@ -2,6 +2,7 @@ import Blits from "@lightningjs/blits";
 
 export default Blits.Component("Card", {
   props: {
+    id: "",
     title: "Movie",
     year: 2026,
     color: "red",
@@ -37,13 +38,13 @@ export default Blits.Component("Card", {
 
   computed: {
     cardColor() {
-      return this.focused ? "rgb(105, 75, 255)" : "#303030";
+      return this.focused ? "rgb(159, 159, 159)" : "#303030";
     },
   },
 
   input: {
     enter() {
-      console.log("Selected title: " + this.title);
+      this.$router.to(`/movie/${this.id}`);
     },
 
     back() {

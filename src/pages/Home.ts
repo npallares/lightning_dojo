@@ -74,8 +74,8 @@ export default Blits.Component("Home", {
   },
 
   template: `
-    <Element w="1920" h="1080" color="rgba(31, 31, 31, 0.87)">
-      <Text x="100" y="50" color="#ffffff" content="Lightning Dojo" />
+    <Element w="1920" h="1080" color="rgba(255, 255, 255, 0.87)">
+      <Text x="100" y="50" color="#000000" content="Lightning Dojo" />
     
       <Stripe
         :for="(stripe, index) in $stripes"

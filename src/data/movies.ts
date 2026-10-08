@@ -32,3 +32,7 @@ export const movies: Movie[] = [
     color: "#cc8844",
   },
 ];
+
+export const getMovieById = (id: string): Movie | undefined => {
+  return movies.find((movie) => movie.id === id);
+};
